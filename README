@@ -1,0 +1,87 @@
+*******************************************************************************
+CS131:  Artificial Intelligence
+A6:     Multilayer Neural Network
+
+Submission by Madelyn Silveira
+05/1/2023
+*******************************************************************************
+
+Included in this assignment:
+main.py     -- Contains the structure of the network. Run file in terminal and 
+               enter sepal and petal dimensions to recieve a prediction.
+
+process.py  -- Contains functions to read and process training data from 
+               iris.data.txt. Used by main and network.py.
+
+network.py  -- Contains classes for Layer, Activation, and Loss objects. Also 
+               includes function for classifying a single input.
+
+iris.txt    -- Dataset from Fishers Iris database (Fisher, 1936). Used for 
+               training of the model.
+
+README      -- this file. Describes implementation and the problem being solved
+
+-------------------------------------------------------------------------------
+GARDENS OF HEAVEN
+- Goal: Classify iris plants with the help of a multi-layer neural network
+- Uses the Fishers Iris database to train the ANN.
+    - 3 classes of 50 instances each
+    - 1 class is linearly separable from the other 2
+    - 2 classes are not linearly separable from each other
+    - the data contains no null values
+
+-------------------------------------------------------------------------------
+Defining this ANN:
+    1. Data preparation:
+        - read in the data from iris_data
+        - export numpy arrays of input data and answers (y_true)
+
+    2. Architecture of the model (network):
+        - input neurons     = 4
+        - output neurons    = 3
+        - hidden layers     = 2
+        - hidden neurons    = 6 per layer
+        - fully connected, dense layers
+
+    3. Structure of the neurons:
+        - activation function = softmax
+
+    4. Parameters of the model:
+        - initialization of weights = random
+        - initialization of biases  = zeros
+        - learning rate             = 0.1
+
+    5. Learning algorithm
+        - learning algorithm = back-propogation
+        - loss function      = categorical cross entropy
+        - predictions        = np.argmax(activation2.output, axis=1)
+        - accuracy           = np.mean(predictions == answers)
+
+y = mx + b: output = weight * input + bias
+-------------------------------------------------------------------------------
+                        Reasoning and Explanation
+Data preparation:
+The data from iris.txt was read into the program. The only preparation neccesary
+for this data was the conversion to numpy arrays. The answers array was scalar
+encoded, although it is converted to one-hot encoding for some calculations.
+
+Architecture of the model:
+By requirement, this model has 4 input neurons and 3 output neurons. I chose to 
+included 2 hidden layers in my implementation, and each hidden layer has 
+6 neurons. The layers are dense, meaning that every neuron is connected to 
+every neuron in the next layer. 
+
+Structure of the neurons:
+I used the softmax activation function for a simple, nonlinear implementation.
+Each neuron has a bias, and an array of weights for its inputs.
+
+Parameters of the model:
+Initialization of weights was random. Biases were initialized to zero.
+
+Learning algorithm:
+Used a backward-propogation algorithm. Used categorical cross entropy function 
+for loss evaluation because its good for categorical problems such as this one. 
+It checks for potential con=mplications of taking log of zero. Prediction was 
+simply the max of the probability outcomes and the accuracy was based on the 
+mean of the correctness of those predictions.
+
